@@ -54,10 +54,10 @@ public class DictionaryConsoleApplication {
                     countAllWords();
                     break;
                 case FIND:
-
+                    find();
                     break;
                 case QUIZ:
-
+//                    quiz();
                     break;
                 default:
                     printConsole("Invalid choice. Restarting app." + DELIMITER);
@@ -66,7 +66,6 @@ public class DictionaryConsoleApplication {
     }
 
     private void enter() {
-
         printConsole("Enter english word");
         String first = scanner.next();
         printConsole("Enter russian word");
@@ -74,6 +73,7 @@ public class DictionaryConsoleApplication {
         PairOfWords pair = new PairOfWords(first, second);
         dictionary.getSetOfPairs().add(pair);
         printConsole("Result is " + dictionary.getSetOfPairs().toString() + "." + DELIMITER);
+
     }
 
     private void display() {
@@ -86,6 +86,21 @@ public class DictionaryConsoleApplication {
     private void countAllWords() {
         printConsole("There are " + dictionary.getSetOfPairs().size() + " words in dictionary");
     }
+
+    public void find() {
+        boolean isFound = false;
+        printConsole("Enter the word you want to search for: ");
+        String wordToFind = scanner.next();
+        for (PairOfWords pair : dictionary.getSetOfPairs()) {
+            if (pair.getEnWord().equals(wordToFind) || pair.getRuWord().equals(wordToFind)) {
+                printConsole(pair.toString());
+                isFound = true;
+            }
+        }
+        if (!isFound)
+            printConsole("There is no such word in the dictionary");
+    }
+
 
     private int getConsoleChoice() {
         int choice;
